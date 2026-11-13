@@ -29,7 +29,7 @@ import torch
 print('PyTorch version:', torch.__version__)
 ```
 
-**Run the code**
+**Run the code (prediction_selection.py)**
 1. Change the code to your own PC path
 Line 30: this is the path where you put the model files.
 ```python
@@ -70,7 +70,6 @@ python prediction_selection.py
 
 5. Angular distance
 -------------------
-
 Angular distance is calculated in radians: Smaller values indicate greater similarity.
 ```python
     angular_distance = arccos(cosine_similarity)
