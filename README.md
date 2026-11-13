@@ -35,7 +35,7 @@ Line 30: this is the path where you put the model files.
 ```python
 base_path = '.../code/align_with_pom_50180_wbce/'
 ```
-Line 793: this is the path where you put the data files. You should use the RAW data file for this code (the data derive from instrument)
+Line 793: this is the path where you put the data files. You should use the RAW data file (.CSV) for this code (the data derive from instrument)
 ```python
 base_dir = '...'
 ```
