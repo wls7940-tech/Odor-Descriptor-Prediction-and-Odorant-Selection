@@ -2,7 +2,7 @@ Odor Descriptor Prediction and Odorant Selection
 ========================================================
 
 This is a guidance to use downstream classification head of SCENT. 
-2026.05.20, by Ziqi Zhang from KTH Royal Institute of Technology
+2026.05.20, by Ziqi Zhang from KTH Royal Institute of Technology,
 2026.11.13 revised by Eunyeong Jin from Max Planck Institute for Chemistry
 
 **Environment setup**
@@ -40,7 +40,7 @@ Line 793: this is the path where you put the data files. You should use the RAW 
 base_dir = '...'
 ```
 
-2. Check GT vector file
+2. Check GT (Ground-truth) vector file
 Place GT_vectors.xlsx in the same directory as the Python script.
 
 The Excel file must contain these columns:
