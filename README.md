@@ -41,14 +41,18 @@ base_dir = '...'
 ```
 
 2. Check GT vector file
-Place: GT_vectors.xlsx in the same directory as the Python script.
+Place GT_vectors.xlsx in the same directory as the Python script.
 
 The Excel file must contain these columns:
+```python
     odorant
     descriptor
     weight
-
-Line 497: r"path/to/your/directory/GT_vectors.xlsx". Replace it with the directory containing the GT file.
+``` 
+Line 497: Replace it with the directory containing the GT file.
+```python
+r"path/to/your/directory/GT_vectors.xlsx"
+``` 
 
 3. cd your terminal to your code path
 ```bash
@@ -67,11 +71,11 @@ python prediction_selection.py
 5. Angular distance
 -------------------
 
-Angular distance is calculated in radians:
-
+Angular distance is calculated in radians: Smaller values indicate greater similarity.
+```python
     angular_distance = arccos(cosine_similarity)
+```
 
-Smaller values indicate greater similarity.
 
 ## Reference
 [1] Zhang, Z. et al. SCENT: Aligning Mass Spectra with Molecular Structure for Olfactory Perception. Preprint at https://doi.org/10.48550/ARXIV.2605.27009 (2026)
