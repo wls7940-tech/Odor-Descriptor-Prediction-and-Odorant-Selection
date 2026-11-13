@@ -40,8 +40,7 @@ Line 793: this is the path where you put the data files. You should use the RAW 
 base_dir = '...'
 ```
 
-2. Check GT (Ground-truth) vector file
-Place GT_vectors.xlsx in the same directory as the Python script.
+2. Check GT (Ground-truth) vector file: Place GT_vectors.xlsx in the same directory as the Python script.
 
 The Excel file must contain these columns:
 ```python
