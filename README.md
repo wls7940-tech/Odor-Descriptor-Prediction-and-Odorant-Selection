@@ -28,7 +28,7 @@ You could test whether PyTorch are available in terminal.
 import torch
 print('PyTorch version:', torch.__version__)
 ```
-
+-------------------
 **Run the code (prediction_selection.py)**
 1. Change the code to your own PC path
 Line 30: this is the path where you put the model files.
@@ -69,13 +69,12 @@ python prediction_selection.py
 ```
 
 5. Angular distance
--------------------
 Angular distance is calculated in radians: Smaller values indicate greater similarity.
 ```python
     angular_distance = arccos(cosine_similarity)
 ```
 
-
+-------------------
 ## Reference
 [1] Zhang, Z. et al. SCENT: Aligning Mass Spectra with Molecular Structure for Olfactory Perception. Preprint at https://doi.org/10.48550/ARXIV.2605.27009 (2026)
 
