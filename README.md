@@ -41,14 +41,9 @@ base_dir = '...'
 ```
 
 2. Check GT vector file
-Place:
-
-    GT_vectors.xlsx
-
-in the same directory as the Python script.
+Place: GT_vectors.xlsx in the same directory as the Python script.
 
 The Excel file must contain these columns:
-
     odorant
     descriptor
     weight
