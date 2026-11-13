@@ -67,8 +67,7 @@ conda activate scent
 python prediction_selection.py
 ```
 
-5. Angular distance
-Angular distance is calculated in radians: Smaller values indicate greater similarity.
+5. Angular distance is calculated in radians: Smaller values indicate greater similarity. The name of the compound whose GT vector is closest to the predicted vector is displayed.
 ```python
     angular_distance = arccos(cosine_similarity)
 ```
