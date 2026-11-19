@@ -135,9 +135,26 @@ def denoise_round(intensity_matrix, results, mz_axis, times):
 
     bg_nan = np.where(bg_combined == 0, np.nan, bg_combined)
 
-    baseline = np.nan_to_num(np.nanmean(bg_nan, axis=0))
-
-    std = np.nan_to_num(np.nanstd(bg_nan, axis=0))
+    # Calculate baseline only for columns with valid background data
+    valid = np.isfinite(bg_nan)
+    counts = valid.sum(axis=0)
+    
+    baseline = np.zeros(bg_nan.shape[1])
+    std = np.zeros(bg_nan.shape[1])
+    
+    valid_cols = counts > 0
+    
+    baseline[valid_cols] = (
+        np.nansum(bg_nan[:, valid_cols], axis=0)
+        / counts[valid_cols]
+    )
+    
+    std[valid_cols] = np.sqrt(
+        np.nansum(
+            (bg_nan[:, valid_cols] - baseline[valid_cols]) ** 2,
+            axis=0
+        ) / counts[valid_cols]
+    )
 
     n_sigma = 5 
     threshold = baseline + (n_sigma * std)
@@ -149,7 +166,7 @@ def denoise_round(intensity_matrix, results, mz_axis, times):
 
     df_intensity_matrix = df_intensity_matrix.loc[:, df_intensity_matrix.columns.notna()]
 
-    df_intensity_matrix = df_intensity_matrix.groupby(level=0, axis=1).sum()
+    df_intensity_matrix = df_intensity_matrix.T.groupby(level=0).sum().T
 
     return df_intensity_matrix
 
