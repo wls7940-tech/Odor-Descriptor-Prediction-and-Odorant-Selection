@@ -101,7 +101,11 @@ class MSTransformer(nn.Module):
             norm_first=True, 
             # dim_feedforward=d_model*4,
         )
-        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
+        self.transformer = nn.TransformerEncoder(
+            encoder_layer,
+            num_layers=num_layers,
+            enable_nested_tensor=False
+        )
         
         self.out_norm = nn.LayerNorm(d_model)
 
