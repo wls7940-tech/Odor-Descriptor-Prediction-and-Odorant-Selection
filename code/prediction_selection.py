@@ -21,13 +21,23 @@ from matplotlib.patches import Patch
 import numpy as np
 from sklearn import manifold
 from tqdm import tqdm
+from pathlib import Path
 
+# ============================================================
+# REPOSITORY PATHS
+# ============================================================
+
+ROOT = Path(__file__).resolve().parent.parent
+
+DATA_DIR = ROOT / "data"
+CKPT_DIR = ROOT / "checkpoints"
+GT_FILE = ROOT / "GT_vectors.xlsx"
 
 device = 'cpu'
 seed = 42
 
 
-base_path = '.../code/align_with_pom_50180_wbce/'
+base_path = CKPT_DIR
 ckpt_template = 'clas_fold1_frac_pom_50180_wbce_all.pt'
 
 
@@ -493,9 +503,7 @@ def to_dataloader(ms_time_average):
 # =========================
 # LOAD GT
 # =========================
-df = pd.read_excel(
-    r"path/to/your/directory/GT_vectors.xlsx"
-)
+df = pd.read_excel(GT_FILE)
 
 df.columns = df.columns.str.strip()
 
@@ -790,7 +798,7 @@ def run_angular_distance(
 # =========================
 if __name__ == "__main__":
 
-    base_dir = '...'
+    base_dir = DATA_DIR
 
     while True:
 
