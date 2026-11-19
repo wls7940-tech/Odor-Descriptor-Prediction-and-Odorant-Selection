@@ -10,67 +10,83 @@ You may need to use terminal tool in your PC to install the environment.
 
 1. Create a clean environment
 ```bash
-conda activate -n scent python=3.10
+conda create -n scent python=3.10
 conda activate scent
 ```
 
 2. Install the required packages
 ```bash
-pip intsall -r requirements.txt
+pip install -r requirements.txt
 ```
 
 3. PyTorch installation
 ```bash
-pip install torch
+pip install torch==2.12.0
 ```
+The code was tested with PyTorch 2.12.0 (CPU version). For GPU users, CUDA-specific installation instructions are available at https://pytorch.org/get-started/locally/
+
 You could test whether PyTorch are available in terminal.
 ```bash
-import torch
-print('PyTorch version:', torch.__version__)
+python -c "import torch; print('PyTorch version:', torch.__version__)"
 ```
 -------------------
-**Run the code (prediction_selection.py)**
-1. Change the code to your own PC path
-Line 30: this is the path where you put the model files.
-```python
-base_path = '.../code/align_with_pom_50180_wbce/'
-```
-Line 793: this is the path where you put the data files. You should use the RAW data file (.CSV) for this code (the data derive from instrument)
-```python
-base_dir = '...'
+## Run the code (prediction_selection.py)
+
+### 1. Prepare the input files
+
+Place the required files in the following repository structure:
+
+```text
+Odor-Descriptor-Prediction-and-Odorant-Selection/
+├── README.md
+├── requirements.txt
+├── GT_vectors.xlsx
+├── data/
+│   └── limonene.csv
+├── checkpoints/
+│   └── clas_fold1_frac_pom_50180_wbce_all.pt
+└── code/
+    ├── prediction_selection.py
+    ├── data.py
+    └── utils_ms.py
 ```
 
-2. Check GT (Ground-truth) vector file: Place GT_vectors.xlsx in the same directory as the Python script.
+- `data/`: Raw mass spectrometry CSV files exported from the instrument.
+- `checkpoints/`: Pretrained model checkpoint files.
+- `GT_vectors.xlsx`: Ground-truth odor descriptor vectors.
 
-The Excel file must contain these columns:
-```python
-    odorant
-    descriptor
-    weight
-``` 
-Line 497: Replace it with the directory containing the GT file.
-```python
-r"path/to/your/directory/GT_vectors.xlsx"
-``` 
+The Excel file must contain the following columns:
+`odorant`, `descriptor`, and `weight`.
 
-3. cd your terminal to your code path
-```bash
-cd ...the root path of where prediction_selection.py locates
-```
-Please make sure your environment is still activate. If not, please run
+All file paths are defined relative to the repository root. No manual path modification is required.
+
+### 2. Open a terminal in the repository root directory
+
+Make sure the `scent` environment is activated.
+
+If necessary, activate it using:
+
 ```bash
 conda activate scent
 ```
 
-4. Run the code in the terminal
+### 3. Run the prediction script
+
 ```bash
-python prediction_selection.py
+python code/prediction_selection.py
 ```
 
-5. Angular distance is calculated in radians: Smaller values indicate greater similarity. The name of the compound whose GT vector is closest to the predicted vector is displayed.
-```python
-    angular_distance = arccos(cosine_similarity)
-```
+When prompted, enter the CSV filename (e.g., `limonene.csv`).
+
+The script automatically reads the CSV file from the `data/` directory.
+
+### 4. Interpret the results
+
+The script predicts odor descriptors from the input mass spectrum and compares the resulting prediction vector with the GT vectors using angular distance.
+
+Angular distance is calculated in radians, with smaller values indicating greater similarity.
+
+The odorant with the smallest angular distance is displayed as the best match.
 
 -------------------
 ## Reference
